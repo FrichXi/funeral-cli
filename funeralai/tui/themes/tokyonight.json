@@ -1,0 +1,38 @@
+{
+  "name": "tokyonight",
+  "description": "Tokyo Night — deep blue",
+  "dark": {
+    "primary": "#7AA2F7",
+    "secondary": "#BB9AF7",
+    "accent": "#7DCFFF",
+    "error": "#F7768E",
+    "warning": "#E0AF68",
+    "success": "#9ECE6A",
+    "info": "#7AA2F7",
+    "text": "#C0CAF5",
+    "text_muted": "#565F89",
+    "background": "#1A1B26",
+    "background_panel": "#16161E",
+    "background_element": "#292E42",
+    "border": "#3B4261",
+    "border_active": "#7AA2F7",
+    "border_subtle": "#292E42"
+  },
+  "light": {
+    "primary": "#2E7DE9",
+    "secondary": "#9854F1",
+    "accent": "#007197",
+    "error": "#F52A65",
+    "warning": "#8C6C3E",
+    "success": "#587539",
+    "info": "#2E7DE9",
+    "text": "#3760BF",
+    "text_muted": "#8990B3",
+    "background": "#E1E2E7",
+    "background_panel": "#D5D6DB",
+    "background_element": "#C4C8DA",
+    "border": "#A8ADC0",
+    "border_active": "#2E7DE9",
+    "border_subtle": "#B4B5B9"
+  }
+}

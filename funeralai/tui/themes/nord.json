@@ -1,0 +1,38 @@
+{
+  "name": "nord",
+  "description": "Nord — arctic blue",
+  "dark": {
+    "primary": "#88C0D0",
+    "secondary": "#81A1C1",
+    "accent": "#5E81AC",
+    "error": "#BF616A",
+    "warning": "#EBCB8B",
+    "success": "#A3BE8C",
+    "info": "#88C0D0",
+    "text": "#ECEFF4",
+    "text_muted": "#4C566A",
+    "background": "#2E3440",
+    "background_panel": "#272C36",
+    "background_element": "#3B4252",
+    "border": "#434C5E",
+    "border_active": "#88C0D0",
+    "border_subtle": "#3B4252"
+  },
+  "light": {
+    "primary": "#5E81AC",
+    "secondary": "#81A1C1",
+    "accent": "#88C0D0",
+    "error": "#BF616A",
+    "warning": "#D08770",
+    "success": "#A3BE8C",
+    "info": "#5E81AC",
+    "text": "#2E3440",
+    "text_muted": "#4C566A",
+    "background": "#ECEFF4",
+    "background_panel": "#E5E9F0",
+    "background_element": "#D8DEE9",
+    "border": "#C0C8D8",
+    "border_active": "#5E81AC",
+    "border_subtle": "#D8DEE9"
+  }
+}

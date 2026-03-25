@@ -1,0 +1,120 @@
+/* Global stylesheet for FuneralAI TUI. */
+
+/* -- Screen base ---------------------------------------------------------- */
+
+Screen {
+    background: $terminal-background;
+    color: $text;
+}
+
+/* -- HomeScreen layout ---------------------------------------------------- */
+
+/* Main area fills space above docked prompt */
+#home-main {
+    height: 1fr;
+}
+
+/* Spacers grow equally → content is vertically centered */
+#spacer-top, #spacer-bottom {
+    height: 1fr;
+}
+
+#logo {
+    width: auto;
+    content-align: center middle;
+    margin-bottom: 1;
+}
+
+HomeScreen PromptInput {
+    max-width: 80;
+    width: 100%;
+}
+
+#tips {
+    max-width: 75;
+    width: auto;
+    margin-top: 1;
+    text-align: center;
+}
+
+/* -- Home top rule -------------------------------------------------------- */
+
+#home-top-rule {
+    width: 100%;
+    height: 1;
+    color: $text-muted;
+    padding: 0 2;
+}
+
+#home-info {
+    width: auto;
+    text-align: center;
+    color: $text-muted;
+    margin-top: 1;
+}
+
+/* -- Autocomplete overlay ------------------------------------------------- */
+
+AutocompleteDropdown {
+    layer: overlay;
+    border: solid $accent;
+    max-height: 10;
+}
+
+/* -- SessionScreen layout ------------------------------------------------- */
+
+#session-scroll {
+    height: 1fr;
+    padding: 0 1;
+    background: $terminal-background;
+}
+
+/* -- Input focus ---------------------------------------------------------- */
+
+Input:focus {
+    border: tall $accent;
+}
+
+PromptInput {
+    background: $terminal-background;
+}
+
+PromptInput Input {
+    background: $surface;
+    color: $text;
+}
+
+PromptInput .prompt-line {
+    color: $border-subtle;
+}
+
+AutocompleteDropdown {
+    background: $surface-elevated;
+}
+
+ToastRack {
+    margin-bottom: 2;
+}
+
+Toast {
+    background: $surface-elevated;
+    color: $text;
+    border: solid $border;
+    max-width: 60;
+}
+
+Toast.-information {
+    border-left: outer $info;
+}
+
+Toast.-warning {
+    border-left: outer $accent;
+}
+
+Toast.-error {
+    border-left: outer $error;
+}
+
+.toast--title {
+    color: $text;
+}

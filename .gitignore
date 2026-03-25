@@ -4,4 +4,15 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+.venv/
 .env
+.claude/
+.conductor/
+.pytest_cache/
+exports/
+plans/current_modification_plan.md
+.private/
+CLAUDE.md
+plans/
+articles/
+data/

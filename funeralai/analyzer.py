@@ -19,6 +19,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Callable
 
+from funeralai.recommendations import DEFAULT_RECOMMENDATION
+
 
 def _progress(msg: str) -> None:
     """Print a progress message to stderr unless FUNERALAI_QUIET is set."""
@@ -53,8 +55,6 @@ _JUDGE_MAX_TOKENS = {
 
 _PIPELINE_NAMES = {1: "local", 2: "github", 3: "web"}
 
-_DEFAULT_RECOMMENDATION = "信息不足，不能判断"
-
 # Field subsets for trimmed judge inputs
 _AD_DETECT_FIELDS = (
     "material_type", "author_attitude", "attitude_signals",
@@ -71,7 +71,7 @@ _SUMMARY_FIELDS = (
 PROVIDERS = {
     "anthropic": {
         "env_key": "ANTHROPIC_API_KEY",
-        "default_model": "claude-sonnet-4-20250514",
+        "default_model": "claude-sonnet-4-6",
         "type": "anthropic",
         "base_url": None,
     },
@@ -89,13 +89,13 @@ PROVIDERS = {
     },
     "kimi": {
         "env_key": "MOONSHOT_API_KEY",
-        "default_model": "moonshot-v1-32k",
+        "default_model": "kimi-k2.5",
         "type": "openai",
-        "base_url": "https://api.moonshot.cn/v1",
+        "base_url": "https://api.moonshot.ai/v1",
     },
     "minimax": {
         "env_key": "MINIMAX_API_KEY",
-        "default_model": "MiniMax-Text-01",
+        "default_model": "MiniMax-M2.7",
         "type": "openai",
         "base_url": "https://api.minimax.chat/v1",
     },
@@ -107,7 +107,7 @@ PROVIDERS = {
     },
     "zhipu": {
         "env_key": "ZHIPU_API_KEY",
-        "default_model": "glm-4-plus",
+        "default_model": "glm-4.7",
         "type": "openai",
         "base_url": "https://open.bigmodel.cn/api/paas/v4",
     },
@@ -172,7 +172,7 @@ def _call_anthropic(
 
     client = anthropic.Anthropic(api_key=api_key, timeout=120.0)
     response = client.messages.create(
-        model=model or "claude-sonnet-4-20250514",
+        model=model or "claude-sonnet-4-6",
         max_tokens=max_tokens,
         system=system_prompt,
         messages=[{"role": "user", "content": user_content}],
@@ -226,9 +226,15 @@ def _resolve_provider(
         cfg = PROVIDERS[provider]
         key = api_key or os.environ.get(cfg["env_key"], "")
         if not key:
+            try:
+                from funeralai.config import get_api_key as _config_get_key
+                key = _config_get_key(provider) or ""
+            except Exception:
+                pass
+        if not key:
             raise RuntimeError(
                 f"使用 {provider} 需要设置环境变量 {cfg['env_key']}，\n"
-                f"或使用 --api-key 参数传入。"
+                f"或通过 funeralai 交互配置，或使用 --api-key 参数传入。"
             )
         return provider, _pick_key(key)
 
@@ -381,20 +387,20 @@ def _assemble_result(results: dict[str, dict | None]) -> dict:
     if verdict and isinstance(verdict, dict):
         assembled["verdict"] = verdict.get("verdict", "")
         assembled["investment_recommendation"] = verdict.get(
-            "investment_recommendation", _DEFAULT_RECOMMENDATION
+            "investment_recommendation", DEFAULT_RECOMMENDATION
         )
         assembled["information_completeness"] = verdict.get(
             "information_completeness", "low"
         )
     else:
         assembled["verdict"] = ""
-        assembled["investment_recommendation"] = _DEFAULT_RECOMMENDATION
+        assembled["investment_recommendation"] = DEFAULT_RECOMMENDATION
         assembled["information_completeness"] = "low"
 
     # Handle advertorial/non_evaluable defaults
     atype = assembled.get("article_type", "")
     if atype in ("non_evaluable", "advertorial"):
-        assembled.setdefault("investment_recommendation", _DEFAULT_RECOMMENDATION)
+        assembled.setdefault("investment_recommendation", DEFAULT_RECOMMENDATION)
 
     return assembled
 
@@ -621,7 +627,7 @@ def _synthesize_votes(individual: list[dict]) -> dict:
     if not recs:
         return {
             "agreement": "split",
-            "recommendation": _DEFAULT_RECOMMENDATION,
+            "recommendation": DEFAULT_RECOMMENDATION,
             "details": "所有模型均未返回有效结论",
         }
 

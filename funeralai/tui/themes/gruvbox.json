@@ -1,0 +1,38 @@
+{
+  "name": "gruvbox",
+  "description": "Gruvbox — retro warm",
+  "dark": {
+    "primary": "#D79921",
+    "secondary": "#B16286",
+    "accent": "#689D6A",
+    "error": "#CC241D",
+    "warning": "#D79921",
+    "success": "#98971A",
+    "info": "#458588",
+    "text": "#EBDBB2",
+    "text_muted": "#928374",
+    "background": "#282828",
+    "background_panel": "#1D2021",
+    "background_element": "#3C3836",
+    "border": "#504945",
+    "border_active": "#D79921",
+    "border_subtle": "#3C3836"
+  },
+  "light": {
+    "primary": "#B57614",
+    "secondary": "#8F3F71",
+    "accent": "#427B58",
+    "error": "#9D0006",
+    "warning": "#B57614",
+    "success": "#79740E",
+    "info": "#076678",
+    "text": "#3C3836",
+    "text_muted": "#928374",
+    "background": "#FBF1C7",
+    "background_panel": "#EBDBB2",
+    "background_element": "#D5C4A1",
+    "border": "#BDAE93",
+    "border_active": "#B57614",
+    "border_subtle": "#D5C4A1"
+  }
+}

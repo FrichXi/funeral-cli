@@ -1,0 +1,38 @@
+{
+  "name": "funeral",
+  "description": "Default Funeral CLI theme — brand purple",
+  "dark": {
+    "primary": "#7351CF",
+    "secondary": "#5B3FA0",
+    "accent": "#9B7FE6",
+    "error": "#E55B5B",
+    "warning": "#E5A84B",
+    "success": "#5BE577",
+    "info": "#5B9BE5",
+    "text": "#E0E0E0",
+    "text_muted": "#888888",
+    "background": "#1A1A2E",
+    "background_panel": "#222240",
+    "background_element": "#2A2A4A",
+    "border": "#444466",
+    "border_active": "#7351CF",
+    "border_subtle": "#333355"
+  },
+  "light": {
+    "primary": "#6341BF",
+    "secondary": "#4B2F90",
+    "accent": "#7B5FD6",
+    "error": "#D53B3B",
+    "warning": "#D5982B",
+    "success": "#3BC557",
+    "info": "#3B7BD5",
+    "text": "#2A2A2A",
+    "text_muted": "#777777",
+    "background": "#FAFAFA",
+    "background_panel": "#F0F0F5",
+    "background_element": "#E8E8F0",
+    "border": "#CCCCDD",
+    "border_active": "#6341BF",
+    "border_subtle": "#DDDDEE"
+  }
+}

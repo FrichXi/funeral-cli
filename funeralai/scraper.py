@@ -28,8 +28,8 @@ def _fetch_and_extract(url: str) -> dict:
         import httpx
     except ImportError:
         raise ImportError(
-            "网页分析需要安装 httpx:\n"
-            "  pip install funeralai[web]"
+            "网页分析缺少依赖 httpx，请重新安装：\n"
+            "  pip install funeralai"
         )
 
     data = {
@@ -117,8 +117,8 @@ def _fetch_and_extract(url: str) -> dict:
                 data["content_extracted"] = True
         except ImportError:
             raise ImportError(
-                "网页内容提取需要安装 trafilatura:\n"
-                "  pip install funeralai[web]"
+                "网页内容提取缺少依赖 trafilatura，请重新安装：\n"
+                "  pip install funeralai"
             )
         except Exception:
             # trafilatura extraction failed — signal via flag, keep content empty
@@ -141,14 +141,40 @@ def _fetch_and_extract(url: str) -> dict:
     return data
 
 
+_browser_installed: bool | None = None  # cached after first check
+
+
+def _install_browser() -> bool:
+    """Auto-install playwright chromium. Returns True on success."""
+    import subprocess
+
+    try:
+        from funeralai.analyzer import _progress
+        _progress("首次使用，正在下载浏览器...")
+        subprocess.run(
+            [sys.executable, "-m", "playwright", "install", "chromium"],
+            check=True,
+            capture_output=True,
+        )
+        return True
+    except Exception:
+        return False
+
+
 def _browser_probe(url: str) -> dict | None:
     """Phase 2: Browser experience test via playwright.
 
     Returns browser-level metrics or None if playwright is unavailable.
+    Auto-installs chromium on first use if needed.
     """
+    global _browser_installed
+
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
+        return None
+
+    if _browser_installed is False:
         return None
 
     data = {
@@ -174,9 +200,28 @@ def _browser_probe(url: str) -> dict | None:
         "error": None,
     }
 
+    def _launch_browser(p):
+        """Launch chromium, auto-installing on first failure."""
+        global _browser_installed
+        if _browser_installed is True:
+            return p.chromium.launch(headless=True)
+        try:
+            b = p.chromium.launch(headless=True)
+            _browser_installed = True
+            return b
+        except Exception:
+            if not _install_browser():
+                _browser_installed = False
+                return None
+            b = p.chromium.launch(headless=True)
+            _browser_installed = True
+            return b
+
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
+            browser = _launch_browser(p)
+            if browser is None:
+                return None
             try:
                 context = browser.new_context(
                     user_agent=_USER_AGENT,
@@ -488,10 +533,7 @@ def inspect_web(url: str, no_browser: bool = False) -> tuple[dict, str, str]:
         _progress("浏览器体验测试...")
         browser_data = _browser_probe(url)
         if browser_data is None:
-            _progress(
-                "提示: 安装 playwright 可启用浏览器体验测试\n"
-                "  pip install funeralai[browser] && playwright install chromium"
-            )
+            _progress("浏览器体验测试不可用，跳过")
 
     # Red flags
     red_flags = _detect_web_red_flags(fetch_data, browser_data)

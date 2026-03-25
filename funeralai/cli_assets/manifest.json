@@ -1,0 +1,48 @@
+{
+  "description": "葬AI CLI 项目终端编码图资产",
+  "usage": "加载 .ansi.txt 文件内容后直接 print 到终端即可显示。文件包含 ANSI truecolor (24-bit) 转义序列，需终端支持。",
+  "assets": {
+    "icon": {
+      "description": "紧凑图标：紫色括号〔〕+ 黑色填充，用于启动页左侧（类似 Claude Code 风格）",
+      "path": "icon/",
+      "variants": {
+        "large": {
+          "file": "icon/large.ansi.txt",
+          "columns": 10,
+          "rows": 5,
+          "note": "标准紧凑图标，配合右侧文字信息使用"
+        },
+        "small": {
+          "file": "icon/small.ansi.txt",
+          "columns": 6,
+          "rows": 4,
+          "note": "更窄终端的备选"
+        }
+      }
+    },
+    "banner": {
+      "description": "全幅文字 logo：〔葬〕AI 完整像素编码图，用于启动 splash 或宽终端展示",
+      "path": "banner/",
+      "variants": {
+        "large": {
+          "file": "banner/large.ansi.txt",
+          "columns": 110,
+          "rows": 30,
+          "note": "高保真版，终端宽度 >= 110 列时使用"
+        },
+        "small": {
+          "file": "banner/small.ansi.txt",
+          "columns": 80,
+          "rows": 22,
+          "note": "标准终端版，终端宽度 >= 80 列时使用"
+        }
+      }
+    }
+  },
+  "colors": {
+    "purple": "#7351CF",
+    "black": "#000000",
+    "white": "#FFFFFF"
+  },
+  "python_example": "from pathlib import Path\nasset_dir = Path(__file__).parent\nicon = (asset_dir / 'icon/large.ansi.txt').read_text()\nprint(icon)"
+}

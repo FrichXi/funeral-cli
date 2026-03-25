@@ -1,0 +1,38 @@
+{
+  "name": "catppuccin",
+  "description": "Catppuccin Mocha — warm pastels",
+  "dark": {
+    "primary": "#CBA6F7",
+    "secondary": "#B4BEFE",
+    "accent": "#F5C2E7",
+    "error": "#F38BA8",
+    "warning": "#FAB387",
+    "success": "#A6E3A1",
+    "info": "#89B4FA",
+    "text": "#CDD6F4",
+    "text_muted": "#6C7086",
+    "background": "#1E1E2E",
+    "background_panel": "#181825",
+    "background_element": "#313244",
+    "border": "#45475A",
+    "border_active": "#CBA6F7",
+    "border_subtle": "#313244"
+  },
+  "light": {
+    "primary": "#8839EF",
+    "secondary": "#7287FD",
+    "accent": "#EA76CB",
+    "error": "#D20F39",
+    "warning": "#FE640B",
+    "success": "#40A02B",
+    "info": "#1E66F5",
+    "text": "#4C4F69",
+    "text_muted": "#9CA0B0",
+    "background": "#EFF1F5",
+    "background_panel": "#E6E9EF",
+    "background_element": "#DCE0E8",
+    "border": "#BCC0CC",
+    "border_active": "#8839EF",
+    "border_subtle": "#CCD0DA"
+  }
+}
