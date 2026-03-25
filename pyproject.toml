@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "funeralai"
+version = "0.1.0"
+description = "AI project analysis CLI tool based on the 葬AI framework"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "葬爱咸鱼", email = "frichdove@gmail.com" },
+]
+keywords = ["ai", "analysis", "investment", "cli"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = ["openai>=1.0", "prompt_toolkit>=3.0"]
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.50"]
+pdf = ["pymupdf>=1.24"]
+web = ["httpx>=0.27", "trafilatura>=1.8"]
+browser = ["playwright>=1.40"]
+all = [
+    "anthropic>=0.50",
+    "pymupdf>=1.24",
+    "httpx>=0.27",
+    "trafilatura>=1.8",
+    "playwright>=1.40",
+]
+dev = [
+    "pytest>=8.0",
+    "dspy",
+    "langextract[openai]",
+]
+
+[project.scripts]
+funeralai = "funeralai.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["funeralai*"]
+
+[tool.setuptools.package-data]
+funeralai = ["prompts/*.md"]

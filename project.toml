@@ -1,0 +1,67 @@
+# Funeral CLI 项目配置
+
+[project]
+name = "funeralai"
+slug = "funeralai"
+version = "0.1.0"
+updated_at = "2026-03-23"
+
+[data]
+article_dir = "articles"
+article_manifest = "data/state/articles_manifest.json"
+graph_file = "data/graph/canonical.json"
+article_count = 72
+graph_nodes = 462
+graph_links = 1155
+
+[product]
+current_goal = "开源交互式 AI 产品分析 agent。pip install funeralai 后直接使用。"
+delivery_form = "TUI 交互会话为主入口，一次性 CLI 为次入口。共享同一套分析引擎。"
+open_source_intent = true
+
+[cli]
+supported_inputs = ["本地文件 (.md/.txt/.pdf)", "GitHub URL", "Web URL", "直接粘贴文本"]
+primary_output = "结构化投资判断报告（终端彩色文本或 JSON）"
+
+[cli.runtime]
+status = "analysis_layer_complete_cli_pending"
+engine = "two_pass_pipeline"
+pipelines = [
+  "local: extract_local.md → judge_local.md",
+  "github: inspector → extract_github.md → judge_github.md",
+  "web: scraper → extract_web.md → judge_web.md",
+]
+
+[analysis_framework]
+version = "0.2"
+status = "stable"
+source_of_truth = "funeralai/prompts/judge_local.md"
+iron_rule = "判断必须完全基于提交的材料内容，不基于对公司的已有认知"
+
+[analysis_framework.priorities]
+p0 = "代码实查 / 产品体验实查 — 东西到底存不存在（仅 github/web 流水线）"
+p1 = "有人在用吗 — 核心任务稳定 + 回头客"
+p2 = "长板有多长 — 场景、壳层价值、入口、版本定义权"
+p3 = "吹的和做的差多远 — 叙事是放大器不是替代品"
+
+[analysis_framework.output_contract]
+decision_field = "investment_recommendation"
+decision_values = ["值得进一步看", "暂不建议投资", "信息不足，不能判断"]
+article_types = ["evaluable", "non_evaluable", "advertorial"]
+
+[analysis_framework.anti_patterns]
+list = [
+  "概念大于产品",
+  "换名词当创新",
+  "表演式复杂",
+  "讲人不讲产品",
+  "供给幻想",
+  "主体性神话",
+  "故事掩盖执行缺口",
+  "Stars 幻觉",
+  "Landing Page 幻觉",
+]
+
+[evaluation]
+human_reviews = "data/eval/human_reviews.json"
+human_review_count = 72
