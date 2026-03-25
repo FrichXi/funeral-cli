@@ -1,17 +1,17 @@
 <p align="center">
-  <img src="docs/assets/logo.svg" alt="葬AI / funaral-cli" width="920" />
+  <img src="docs/assets/logo.svg" alt="葬AI / funeral-cli" width="920" />
 </p>
 
 ```bash
-git clone https://github.com/FrichXi/funaral-cli.git
-cd funaral-cli
+git clone https://github.com/FrichXi/funeral-cli.git
+cd funeral-cli
 pip install -e .
 ```
 
-> 仓库名：`funaral-cli`  
+> 仓库名：`funeral-cli`
 > Python 包名 / 命令名：`funeralai`
 
-`funaral-cli` 是一个开源的 AI 产品分析 CLI / TUI。
+`funeral-cli` 是一个开源的 AI 产品分析 CLI / TUI。
 
 它的目标不是帮用户写一段更漂亮的夸奖词，而是把一个产品、一个 GitHub 仓库、一个网页、或者一篇文章拆开来看：到底有没有真实产品，真实能力在哪里，吹的和做的差多远。
 
@@ -24,7 +24,7 @@ pip install -e .
 - 会包装成 Agent、平台、工作流革命，但本质上只是模型套壳
 - 会写很长的 README、PRD、融资新闻，但很难回答“它到底行不行”
 
-`funaral-cli` 就是为这个场景做的。
+`funeral-cli` 就是为这个场景做的。
 
 它把“产品判断”拆成一条明确流水线，用结构化方法去看材料、追问体验、抽证据、给结论。重点不是预测未来，而是尽可能真实地描述现在。
 

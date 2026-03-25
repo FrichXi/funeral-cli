@@ -1,6 +1,6 @@
 # Open Source Scope
 
-This repository is the public, runnable distribution of `funaral-cli`.
+This repository is the public, runnable distribution of `funeral-cli`.
 
 ## Public Keep
 
